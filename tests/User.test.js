@@ -1,13 +1,40 @@
 const User = require('../src/User')
 
-// User tests here
+describe('Testing the User construction',()=> {
 
-// test username
+    
+    test('Test the User Object',()=>{
+        newUser = new User('Bill','Wow',20)
+        expect(newUser.username).toBe('Bill')
+        expect(newUser.password).toBe('Wow')
+        expect(newUser.age).toBe(20)
+        expect(newUser.loggedIn).toBe(false)
+    })
 
-// test password
+})
 
-// test age
+describe('Testing the User methods',()=> {
 
-// test login
+    
+    describe('Testing the login Method',()=>{
+        test('Wrong password gives error',()=>{
+            newUser = new User('Bill','Wow',20)
+            expect(function() {newUser.login('ecksdee')}).toThrow('Incorrect password')
+        })
 
-// test logout
+        test('Correct password succeeds',()=>{
+            newUser = new User('Bill','Wow',20)
+            newUser.login('Wow')
+            expect(newUser.loggedIn).toBe(true)
+        })
+    })
+
+    describe('Testing the logout Method',()=>{
+        test('Logging out works',()=>{
+            newUser = new User('Bill','Wow',20)
+            newUser.login('Wow')
+            newUser.logout()
+            expect(newUser.loggedIn).toBe(false)
+        })
+    })
+})
