@@ -2,16 +2,18 @@ const Scooter = require('../src/Scooter')
 const User = require('../src/User')
 const ScooterApp = require('../src/ScooterApp')
 
-// ScooterApp tests here
-
-
 describe('Testing the ScooterApp construction',()=> {
 
     // Test that the Object is initialized correctly
+    // consider testing the initialization of the other attributes
+    // of the ScooterApp class as well
     test('Test the Stations Object',() => {
         
         
         // Create Expected Values
+        // I adjusted some of the spacing in the src files to 
+        // ensure further readability of the code. consider 
+        // modifying some of the spacing in the test files as well
         expected_loc = {"Texas":[],"NYC":[],"Seattle":[]};
         expected_keys = Object.keys(expected_loc).sort()
         expected_length = expected_keys.length
@@ -27,8 +29,7 @@ describe('Testing the ScooterApp construction',()=> {
         // Locations should be same length
         expect(testing_length).toBe(expected_length)
 
-
-
+        // this is a really thorough and creative check of each of the station arrays!
 
         // check locations AND check Arrays. 
         // Remember to sort, so that they have the same order.
@@ -106,6 +107,10 @@ describe('Testing the ScooterApp Methods',()=> {
             expect(function() {newApp.loginUser('bill','memes')}).toThrow(new Error('Username or password incorrect'))
 
         })
+
+        // coinciding with the comment in the class file,
+        // this test below could fit well in the User test if
+        // the logic behind it is moved to the User class 
         test('Throw Error if already logged in',()=>{
             let newApp = new ScooterApp();
             newApp.registerUser('bill','wow',20)
@@ -154,6 +159,8 @@ describe('Testing the ScooterApp Methods',()=> {
 
         test('Throw Error for location not found',()=>{
             let newApp = new ScooterApp();
+            // consider changing 'wow' station name to a name that 
+            // is clearer that this is a station
             expect(function() {newApp.createScooter('wow')}).toThrow(new Error('No Such Station'))
         })
         
@@ -163,10 +170,14 @@ describe('Testing the ScooterApp Methods',()=> {
             expect(newApp.globalScootersSerials).toBe(2)
         })
 
+        // consider adding a test that verifies station's scooter count
+        // and contents modifying upon correct creation of scooters
     })
 
 
     // rent scooter
+    // note: these tests would change as well to reflect method argument
+    // adjustments described in the class file
     describe('Testing Renting',() =>{
 
         test('Throw Error for Not Valid Station',()=>{
@@ -206,6 +217,9 @@ describe('Testing the ScooterApp Methods',()=> {
             newApp.createScooter('NYC')
             newApp.rentScooter('bill','NYC')
             expect(newApp.stations['NYC'].length).toBe(0)
+            // consider explicitly checking that the created scooter
+            // is in the rentedScooters object rather than the presence of 
+            // an item at an index
             expect(1 in newApp.rentedScooters).toBe(true)
         })
 
@@ -226,6 +240,8 @@ describe('Testing the ScooterApp Methods',()=> {
             newApp.registerUser('bill','wow',20)
             newApp.loginUser('bill','wow')
             newApp.rentScooter('bill','NYC')
+            // similar comment to above - clearer station name here
+            // would increase readability
             expect(function() {newApp.dockScooter(newApp.rentedScooters[1]),'Wow'}).toThrow('Station does not exist')
         });
 

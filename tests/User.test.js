@@ -1,5 +1,6 @@
 const User = require('../src/User')
 
+// double check consistency of indentation size across test and class files
 describe('Testing the User construction',()=> {
 
     
