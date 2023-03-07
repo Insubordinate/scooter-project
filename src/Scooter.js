@@ -1,6 +1,6 @@
-class Scooter{
-  // scooter code here
-  constructor(station,serial){
+class Scooter {
+
+  constructor(station, serial) {
     this.station = station;
     this.user = null;
     this.serial = serial;
@@ -8,11 +8,11 @@ class Scooter{
     this.isBroken = false;
   };
 
-  rent(user){
-    if (this.charge <= 20){
+  rent(user) {
+    if (this.charge <= 20) {
       throw new Error('Scooter needs to charge')
     }
-    if (this.isBroken === true){
+    if (this.isBroken) {
       throw new Error('Scooter needs repair')
     }
     
@@ -20,21 +20,21 @@ class Scooter{
     this.user = user;
   }
 
-  dock(station){
+  dock(station) {
     this.station = station;
     this.user = null;
   }
 
-  recharge(){
-    if(this.charge === 100){
+  recharge() {
+    if(this.charge === 100) {
       throw new Error('Already charged')
     }
     this.charge = 100;
     console.log('Scooter Charged')
   }
 
-  requestRepair(){
-    if(this.isBroken === false){
+  requestRepair() {
+    if(!this.isBroken) {
       throw new Error('Cannot fix what is not broke');
     }
     this.isBroken = false;

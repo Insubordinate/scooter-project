@@ -6,6 +6,9 @@ describe('Testing the ScooterApp construction',()=> {
 
     
     test('Test the Scooter Object',()=>{
+        // be careful when comparing objects by sorting attributes. 
+        // your example in the User test file seems more straightforward
+        // and would work well here too
         let expectedScooterValues = ['NYC',null,1,100,false].sort()
         let testScooter = new Scooter('NYC',1)
         let testScooterValues = Object.values(testScooter).sort()
@@ -58,6 +61,7 @@ describe('Testing the Scooter Methods',()=> {
     describe('Testing the dock method',()=> {
         test('Handles Docking',()=>{
             let testScooter = new Scooter('NYC',1)
+            // user object on below line is unused
             let user = new User('bill','wow',10)
             testScooter.dock('NYC')
             expect(testScooter.station).toBe('NYC')
@@ -65,5 +69,7 @@ describe('Testing the Scooter Methods',()=> {
         })
     });
 
-
+    // these tests above are very thorough! make sure to increase
+    // test coverage by including tests for all methods in the class
+    // including the recharge and requestRepair methods
 })
